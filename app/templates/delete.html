@@ -1,0 +1,26 @@
+
+{% extends "base.html" %}
+
+{% block title %}
+Delete a course
+{% endblock %}
+
+
+{% block content %}
+    <form action="/delete/{{ id }}" method="POST">
+    {% csrf_token %}   
+        <div>
+            <h3>Are you sure you want to delete the following course?</h3>
+            <h5>Name: {{ name }}</h5>
+            <h5>Description: {{ description }}</h5>
+        </div>
+        <div class="row">
+            <input type="hidden" name="no">
+            <input type="hidden" name="yes">
+            <div class="col-2"><button type="submit" class="btn btn-primary">No</button></div>
+            <div class="col-5"><button type="submit" class="btn btn-danger">Yes! I want to delete this</button></div>
+        </div>
+    </form>
+
+{% endblock %}
+

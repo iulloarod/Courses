@@ -1,0 +1,62 @@
+
+{% extends "base.html" %}
+
+{% block title %}{% endblock %}
+
+
+{% if messages %}{% endif %}
+
+
+{% block scripts %}{% endblock %}
+
+
+{% block header %}{% endblock %}
+
+
+{% block nav %}{% endblock %}
+
+
+{% block content %}
+    <div class="mt-2 mx-5 pt-5 py-2 col-7" >
+        <form action="/" method="POST">
+            {% csrf_token %}
+            <h3>Add a new course</h3>
+            <div class="form-group">
+                <p>Name: <input name="name" value="{{name}}" type="text" class="form-control" id="name" placeholder="Add Name"></p>
+            </div>
+            <div class="form-group">
+                <p>Description: <textarea name="description" class="form-control" id="description"placeholder="Add Description" rows="6">{{description}}</textarea></p>
+            </div>
+            <div class="row justify-content-end py-3 px-3">
+                <button type="submit" class="btn btn-primary ">Add</button>
+            </div>
+        </form>
+    </div>
+    <div class="mb-2 mx-5 pb-5 py-2">
+        <h3>Courses</h3>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Date Added</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for course in all_courses %}
+                <tr>
+                    <th scope="row">{{ course.name }}</th>
+                    <td>{{ course.description }}</td>
+                    <td>{{ course.date_added }}</td>
+                    <td><a href="/delete/{{ course.id }}"> Delete</a></td>
+                {% endfor %}
+                </tr>
+            </tbody>
+            
+        </table>
+    </div>
+{% endblock %}
+
+
+{% block footer %}{% endblock %}
